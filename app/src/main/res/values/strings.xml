@@ -8,8 +8,15 @@
     <string name="Sadness">Sadness</string>
     <string name="Fear">Fear</string>
 
-    <string name="history">Checkout History</string>
-    <string name="Comment">Leave some Comments?(optional)</string>
+    <string name="Records">Checkout Records</string>
+    <string name="Comment1">Leave some Comments? (optional)</string>
     <string name="Edit">Edit</string>
+    <string name="Clear">Clear</string>
+
+    <string name="Emotion">Emotion:</string>
+    <string name="Date">Date:</string>
+    <string name="Comment2">Comment:</string>
+    <string name="Input">Input the changes.</string>
+    <string name="Save">Save</string>
     <string name="Delete">Delete</string>
 </resources>
