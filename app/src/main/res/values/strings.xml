@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">zfu-FeelsBook</string>
+
+    <string name="Love">Love</string>
+    <string name="Joy">Joy</string>
+    <string name="Surprise">Surprise</string>
+    <string name="Anger">Anger</string>
+    <string name="Sadness">Sadness</string>
+    <string name="Fear">Fear</string>
+
+    <string name="history">Checkout History</string>
+    <string name="Comment">Leave some Comments?(optional)</string>
+    <string name="Edit">Edit</string>
+    <string name="Delete">Delete</string>
+</resources>
