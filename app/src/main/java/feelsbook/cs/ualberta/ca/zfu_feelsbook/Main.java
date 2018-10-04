@@ -17,17 +17,21 @@
 */
 package feelsbook.cs.ualberta.ca.zfu_feelsbook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class Main extends AppCompatActivity {
     //Assign six emotions.
-    public static Emotion Love = new Emotion("Love");
-    public static Emotion Joy = new Emotion("Joy");
-    public static Emotion Surprise = new Emotion("Surprise");
-    public static Emotion Anger = new Emotion("Anger");
-    public static Emotion Sadness = new Emotion("Sadness");
-    public static Emotion Fear = new Emotion("Fear");
+    protected Emotion Love = new Emotion("Love");
+    protected Emotion Joy = new Emotion("Joy");
+    protected Emotion Surprise = new Emotion("Surprise");
+    protected Emotion Anger = new Emotion("Anger");
+    protected Emotion Sadness = new Emotion("Sadness");
+    protected Emotion Fear = new Emotion("Fear");
 
     
 
@@ -37,5 +41,15 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //setup the record button that start a new activity to view record list.
+        Button buttonrecord = (Button)findViewById(R.id.button_record);
+        buttonrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main.this, RecordList.class);
+                startActivity(intent);
+            }
+        });
     }
 }
