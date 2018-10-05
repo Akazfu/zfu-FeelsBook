@@ -62,7 +62,7 @@ public class CountActivity extends AppCompatActivity {
             }else if(emotionName.equals("Surprise")){
                 emotionMap.put("Surprise",++counts[2]);
             }else if(emotionName.equals("Anger")){
-                emotionMap.put("Anger",+counts[3]);
+                emotionMap.put("Anger",++counts[3]);
             }else if(emotionName.equals("Sadness")){
                 emotionMap.put("Sadness",++counts[4]);
             } else if(emotionName.equals("Fear")){
