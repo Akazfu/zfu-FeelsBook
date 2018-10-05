@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RecordController.getRecords(getSharedPreferences("emotions", MODE_MULTI_PROCESS));
     }
 
     public void viewRecord(View view) {
@@ -50,14 +52,16 @@ public class MainActivity extends AppCompatActivity {
         String buttonText = (String) clickedEmotion.getText();
         EditText input = (EditText) findViewById(R.id.text_addcomment);
         Emotion newEmotion = new Emotion(buttonText);
+        newEmotion.setCurrentDate();
 
-        Toast.makeText(this,"New emotion (" + buttonText + ") added.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "New emotion (" + buttonText + ") added.", Toast.LENGTH_SHORT).show();
         if (input != null) {
-            newEmotion.comment = input.getText().toString();
+            newEmotion.setComment(input.getText().toString());
             input.getText().clear();
         } else {
-            newEmotion.comment = null;
+            newEmotion.setComment(null);
         }
-        rc.addEmotion(newEmotion);
+        rc.addEmotion_(newEmotion);
+        rc.save2SharePreferences(getSharedPreferences("emotions", MODE_MULTI_PROCESS));
     }
 }

@@ -48,31 +48,21 @@ public class RecordActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
 
-                // start a new activity
-//                Intent intent = new Intent(RecordActivity.this, EditActivity.class);
-//                intent.putExtra("emotionName",meg);
-//                startActivity(intent);
+                Emotion emotion = (Emotion) parent.getItemAtPosition(position);
+//                Toast.makeText(RecordActivity.this, emotion.toString(), Toast.LENGTH_SHORT).show();
 
-                Emotion emotion= (Emotion) parent.getItemAtPosition(position);
-                Toast.makeText(RecordActivity.this, emotion.toString(), Toast.LENGTH_SHORT).show();
                 // start a new activity
                 Intent intent = new Intent(RecordActivity.this, EditActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("MyString", "test bundle");
-
-                intent.putExtra("date",emotion.getDate().toString());
-                intent.putExtra("name",emotion.getName());
-                intent.putExtra("comment",emotion.getComment());
+                intent.putExtra("date", emotion.getDate());
+                intent.putExtra("name", emotion.getName());
+                intent.putExtra("comment", emotion.getComment());
                 startActivity(intent);
-
 
 //                TextView textView = (TextView) viewClicked;
 //                position ++;
 //                //textView.getText().toString()
 //                String message = "You selected #" + position + ", record in the list.";
 //                Toast.makeText(RecordActivity.this, message, Toast.LENGTH_SHORT).show();
-
-
             }
         });
     }
@@ -83,15 +73,14 @@ public class RecordActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("action.refreshRecord"))
-            {
+            if (action.equals("action.refreshRecord")) {
                 refresh();
             }
         }
     };
 
-    public void refresh(){
-        ArrayList<Emotion> emotions = RecordController.getRecord().getEmotions();
+    public void refresh() {
+        ArrayList<Emotion> emotions = RecordController.getRecords(getSharedPreferences("emotions", MODE_MULTI_PROCESS));
         ArrayList<Emotion> list = new ArrayList<Emotion>(emotions);
         final ArrayAdapter<Emotion> adapter = new ArrayAdapter<Emotion>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);

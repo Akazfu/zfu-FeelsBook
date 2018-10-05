@@ -7,25 +7,29 @@ import java.util.Objects;
 
 public class Emotion {
     protected String name;
-    public String date;
-    public String comment;
+    private String date;
+    private String comment;
 
-    //Constructor method, which initialize the current date, count=0, and a null comment.
-    Emotion(String name){
+    Emotion(String name) {
         this.name = name;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CANADA);
-        this.date = sdf.format(new Date());
-        this.comment = null;
+    }
+
+    Emotion(String name, String date, String comment) {
+        this.name = name;
+        this.date = date;
+        this.comment = comment;
     }
 
     //implement some methods for attributes of Emotion Objects.
     public String getName() {
         return this.name;
     }
+
     public String getDate() {
         return this.date;
     }
-    public String getComment(){
+
+    public String getComment() {
         return this.comment;
     }
 
@@ -35,6 +39,11 @@ public class Emotion {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CANADA);
+        this.date = sdf.format(new Date());
     }
 
     public void setComment(String comment) {
