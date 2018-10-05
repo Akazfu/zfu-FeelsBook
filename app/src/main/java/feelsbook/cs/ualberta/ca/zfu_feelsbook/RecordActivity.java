@@ -26,16 +26,12 @@ public class RecordActivity extends AppCompatActivity {
         final ArrayAdapter<Emotion> adapter = new ArrayAdapter<Emotion>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
         clickCallback();
-    }
 
+    }
 
     public void editRecord(View view) {
         Intent intent = new Intent(RecordActivity.this, EditActivity.class);
         startActivity(intent);
-    }
-
-    public void clearRecord(View view) {
-        Toast.makeText(this,"Records cleared!", Toast.LENGTH_SHORT).show();
     }
 
     //this method is a notification for user to know which line of the list is clicked for edit.
@@ -52,4 +48,6 @@ public class RecordActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

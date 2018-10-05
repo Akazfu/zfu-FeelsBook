@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Emotion {
-
     protected String name;
     public Date date;
     public String comment;
@@ -31,11 +30,7 @@ public class Emotion {
     //To covert emotion objects to a line of String, which date is in ISO:8601 format.
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CANADA);
-        String formattedDate = sdf.format(new Date());
-        if (this.comment == null) {
-            return formattedDate + " | " + this.name + " | no comment";
-        } else {
-            return formattedDate + " | " + this.name + " | " + this.comment;
-        }
+        String formattedDate = sdf.format(this.date);
+        return formattedDate + " | " + this.name + " | " + this.comment;
     }
 }

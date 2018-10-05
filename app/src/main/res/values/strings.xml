@@ -8,7 +8,7 @@
     <string name="Sadness">Sadness</string>
     <string name="Fear">Fear</string>
 
-    <string name="Records">Checkout Records</string>
+    <string name="Records">Records</string>
     <string name="Comment1">Leave some Comments? (optional)</string>
     <string name="Edit">Edit</string>
     <string name="Clear">Clear</string>
@@ -19,4 +19,5 @@
     <string name="Input">Input the changes.</string>
     <string name="Save">Save</string>
     <string name="Delete">Delete</string>
+    <string name="Count">Count</string>
 </resources>

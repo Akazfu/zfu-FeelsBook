@@ -39,12 +39,25 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, RecordActivity.class);
         startActivity(intent);
     }
+
+    public void viewCount(View view) {
+        Intent intent = new Intent(MainActivity.this, CountActivity.class);
+        startActivity(intent);
+    }
+
     public void emotionClick(View view) {
         Button clickedEmotion = (Button) view;
         String buttonText = (String) clickedEmotion.getText();
         EditText input = (EditText) findViewById(R.id.text_addcomment);
         Emotion newEmotion = new Emotion(buttonText);
+
         Toast.makeText(this,"New emotion (" + buttonText + ") added.", Toast.LENGTH_SHORT).show();
+        if (input != null) {
+            newEmotion.comment = input.getText().toString();
+            input.getText().clear();
+        } else {
+            newEmotion.comment = null;
+        }
         rc.addEmotion(newEmotion);
     }
 }
