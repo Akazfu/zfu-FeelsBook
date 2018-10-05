@@ -1,6 +1,9 @@
 package feelsbook.cs.ualberta.ca.zfu_feelsbook;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,21 +15,25 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class RecordActivity extends AppCompatActivity {
+    private ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
 
-        ListView listView = (ListView) findViewById(R.id.list_Records);
-        Collection<Emotion> emotions = RecordController.getRecord().getEmotions();
-        final ArrayList<Emotion> list = new ArrayList<Emotion>(emotions);
-        final ArrayAdapter<Emotion> adapter = new ArrayAdapter<Emotion>(this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
+        listView = (ListView) findViewById(R.id.list_Records);
+
+        refresh();
         clickCallback();
 
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("action.refreshRecord");
+        registerReceiver(mRefreshBroadcastReceiver, intentFilter);
     }
 
     public void editRecord(View view) {
@@ -40,14 +47,60 @@ public class RecordActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                TextView textView = (TextView) viewClicked;
-                position ++;
-                //textView.getText().toString()
-                String message = "You selected #" + position + ", record in the list.";
-                Toast.makeText(RecordActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                // start a new activity
+//                Intent intent = new Intent(RecordActivity.this, EditActivity.class);
+//                intent.putExtra("emotionName",meg);
+//                startActivity(intent);
+
+                Emotion emotion= (Emotion) parent.getItemAtPosition(position);
+                Toast.makeText(RecordActivity.this, emotion.toString(), Toast.LENGTH_SHORT).show();
+                // start a new activity
+                Intent intent = new Intent(RecordActivity.this, EditActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("MyString", "test bundle");
+
+                intent.putExtra("date",emotion.getDate().toString());
+                intent.putExtra("name",emotion.getName());
+                intent.putExtra("comment",emotion.getComment());
+                startActivity(intent);
+
+
+//                TextView textView = (TextView) viewClicked;
+//                position ++;
+//                //textView.getText().toString()
+//                String message = "You selected #" + position + ", record in the list.";
+//                Toast.makeText(RecordActivity.this, message, Toast.LENGTH_SHORT).show();
+
+
             }
         });
     }
 
+
+    // broadcast receiver
+    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("action.refreshRecord"))
+            {
+                refresh();
+            }
+        }
+    };
+
+    public void refresh(){
+        ArrayList<Emotion> emotions = RecordController.getRecord().getEmotions();
+        ArrayList<Emotion> list = new ArrayList<Emotion>(emotions);
+        final ArrayAdapter<Emotion> adapter = new ArrayAdapter<Emotion>(this, android.R.layout.simple_list_item_1, list);
+        listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mRefreshBroadcastReceiver);
+    }
 
 }

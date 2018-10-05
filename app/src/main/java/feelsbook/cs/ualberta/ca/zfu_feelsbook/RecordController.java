@@ -14,6 +14,10 @@ public class RecordController {
         getRecord().addEmotion(emotion);
     }
 
+    public void removeEmotion(Emotion emotion){
+        getRecord().removeEmotion(emotion);
+    }
+
     /*public Emotion chooseEmotion(int index) throws EmptyRecordException {
         return getRecord().chooseEmotion(index);
     }*/

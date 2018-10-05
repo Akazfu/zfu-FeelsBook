@@ -10,7 +10,7 @@ public class Record {
         record = new ArrayList<Emotion>();
     }
 
-    public Collection<Emotion> getEmotions() {
+    public ArrayList<Emotion> getEmotions() {
         return record;
     }
 
@@ -18,8 +18,17 @@ public class Record {
         record.add(newEmotion);
     }
 
-    public void removeEmotion(int index) {
-        record.remove(index);
+    public void removeEmotion(Emotion emotion) {
+        int id=-1;
+        for(int i=0;i<record.size();i++){
+            if(record.get(i).equals(emotion)){
+                id=i;
+                break;
+            }
+        }
+        if(id!=-1){
+            record.remove(id);
+        }
     }
 
     public int size() {
