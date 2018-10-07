@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CountActivity extends AppCompatActivity {
+    //setup count for 6 emotions.
     TextView Joy;
     TextView Love;
     TextView Surprise;
@@ -33,6 +34,7 @@ public class CountActivity extends AppCompatActivity {
         Sad = (TextView) findViewById(R.id.count_sadness);
         Fear = (TextView) findViewById(R.id.count_fear);
 
+        // setup a list of count textview, and a list of string to find counts.
         emotions = new ArrayList<TextView>();
         emotionText = new ArrayList<String>();
 
@@ -50,7 +52,9 @@ public class CountActivity extends AppCompatActivity {
         emotionText.add("Fear");
 
         emotionMap = new HashMap<>();
+        //get emotion list from record controller check the names, if equal put to corresponding emotion hash map.
         ArrayList<Emotion> emotionList = RecordController.getRecords(getSharedPreferences("emotions", MODE_MULTI_PROCESS));
+        //for same string, counts add 1.
         int counts[] = new int[6];
         for (int i = 0; i < emotionList.size(); i++) {
             String emotionName = emotionList.get(i).getName();
@@ -69,6 +73,7 @@ public class CountActivity extends AppCompatActivity {
             }
         }
 
+        //set the counts in count activity to corresponding text view.
         for (String key : emotionMap.keySet()) {
             String countStr = String.valueOf(emotionMap.get(key));
             if (key.equals("Joy")) {

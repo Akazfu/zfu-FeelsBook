@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditActivity extends AppCompatActivity {
+    //setup edit attributes.
     private EditText emotionName;
     private EditText date;
     private EditText comment;
@@ -22,6 +23,7 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        //find texts.
         emotionName = findViewById(R.id.text_change1);
         date = findViewById(R.id.text_change2);
         comment = findViewById(R.id.text_change3);
@@ -29,13 +31,16 @@ public class EditActivity extends AppCompatActivity {
         btn_save = findViewById(R.id.button_save);
 
         Intent intent = getIntent();
+        //get inputs from user and set strings.
         emotionName.setText(intent.getStringExtra("name"));
         date.setText(intent.getStringExtra("date"));
         comment.setText(intent.getStringExtra("comment"));
+        //get the emotion.
         final Emotion emotion = new Emotion(intent.getStringExtra("name"));
         emotion.setDate(intent.getStringExtra("date"));
         emotion.setComment(intent.getStringExtra("comment"));
 
+        //Once click save button, set up new rc, replace the old emotion with user input emotion. refresh records.
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +63,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        //this is a fuction for remove the selected emotion.
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -14,13 +14,14 @@ public class Emotion {
         this.name = name;
     }
 
+    //Constructor method for emotion, contains name, date, and comment.
     Emotion(String name, String date, String comment) {
         this.name = name;
         this.date = date;
         this.comment = comment;
     }
 
-    //implement some methods for attributes of Emotion Objects.
+    //implement some methods for get or edit attributes of Emotion Objects.
     public String getName() {
         return this.name;
     }
@@ -41,6 +42,7 @@ public class Emotion {
         this.date = date;
     }
 
+    //This its a method for get current date and edit the format to ISO:8601 standard.
     public void setCurrentDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CANADA);
         this.date = sdf.format(new Date());
@@ -50,7 +52,7 @@ public class Emotion {
         this.comment = comment;
     }
 
-    //To covert emotion objects to a line of String, which date is in ISO:8601 format.
+    //To covert emotion objects to a line of String (date|name|comment), which date is in ISO:8601 format.
     public String toString() {
         return this.date + " | " + this.name + " | " + this.comment;
     }

@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    //setup a record controller for general use of functions, like store, edit, etc...
     public static RecordController rc = new RecordController();
 
     @Override
@@ -33,20 +34,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //load data using SharedPreferences.
         RecordController.getRecords(getSharedPreferences("emotions", MODE_MULTI_PROCESS));
     }
 
+    //this function is called on click of button record to jump to record list activity.
     public void viewRecord(View view) {
         //Toast.makeText(this,"Checkout Records.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, RecordActivity.class);
         startActivity(intent);
     }
 
+    //called by onclick button count, jump to count activity.
     public void viewCount(View view) {
         Intent intent = new Intent(MainActivity.this, CountActivity.class);
         startActivity(intent);
     }
 
+    // general action for click emotion buttons.
     public void emotionClick(View view) {
         Button clickedEmotion = (Button) view;
         String buttonText = (String) clickedEmotion.getText();
@@ -54,14 +59,18 @@ public class MainActivity extends AppCompatActivity {
         Emotion newEmotion = new Emotion(buttonText);
         newEmotion.setCurrentDate();
 
+        //notification for confirm which emotion button is clicked, and added to the record.
         Toast.makeText(this, "New emotion (" + buttonText + ") added.", Toast.LENGTH_SHORT).show();
+        //if/else statement for whether the user input is valid or set it to null.
         if (input != null) {
             newEmotion.setComment(input.getText().toString());
             input.getText().clear();
         } else {
             newEmotion.setComment(null);
         }
+        //add the new emotion to the record controller.
         rc.addEmotion_(newEmotion);
+        //save data.
         rc.save2SharePreferences(getSharedPreferences("emotions", MODE_MULTI_PROCESS));
     }
 }

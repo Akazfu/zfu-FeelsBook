@@ -5,10 +5,11 @@ import android.content.SharedPreferences;
 import java.util.ArrayList;
 
 public class RecordController {
-    private static ArrayList<Emotion> records;
 
+    private static ArrayList<Emotion> records;
     private static RecordController recordController = null;
 
+    //function to get the records, if record data is not exist, create a new arraylist instead.
     public static ArrayList<Emotion> getRecords(SharedPreferences sharedPreferences) {
         if (records != null) {
             return records;
@@ -20,10 +21,12 @@ public class RecordController {
         return records;
     }
 
+    //add emotion to the records.
     public void addEmotion_(Emotion emotion) {
         records.add(emotion);
     }
 
+    //remove the selected emotion from records.
     public void removeEmotion_(Emotion emotion) {
         int id = -1;
         for (int i = 0; i < records.size(); i++) {
@@ -37,6 +40,7 @@ public class RecordController {
         }
     }
 
+    //save data in a string form using SharePreferences.
     public void save2SharePreferences(SharedPreferences sharedPreferences) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         ArrayList<Emotion> emotions = records;
@@ -51,6 +55,7 @@ public class RecordController {
         editor.apply();
     }
 
+    //read data using SharePreferences.
     public static ArrayList<Emotion> readFromSharePreferences(SharedPreferences sharedPreferences) {
         ArrayList<Emotion> emotions = new ArrayList<>();
         int count = sharedPreferences.getInt("count", -1);

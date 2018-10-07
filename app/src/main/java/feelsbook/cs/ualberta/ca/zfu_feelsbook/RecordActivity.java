@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class RecordActivity extends AppCompatActivity {
+    //this activity shows a list view of records saved in phone data.
     private ListView listView;
 
 
@@ -36,20 +37,22 @@ public class RecordActivity extends AppCompatActivity {
         registerReceiver(mRefreshBroadcastReceiver, intentFilter);
     }
 
-    public void editRecord(View view) {
-        Intent intent = new Intent(RecordActivity.this, EditActivity.class);
-        startActivity(intent);
-    }
+    //button edit for jump to edit activity.
+    //public void editRecord(View view) {
+        //Intent intent = new Intent(RecordActivity.this, EditActivity.class);
+        //startActivity(intent);
+    //}
 
     //this method is a notification for user to know which line of the list is clicked for edit.
     private void clickCallback() {
+        //setup edit activity on click the item in records list view.
         ListView list = (ListView) findViewById(R.id.list_Records);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
 
                 Emotion emotion = (Emotion) parent.getItemAtPosition(position);
-//                Toast.makeText(RecordActivity.this, emotion.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RecordActivity.this, emotion.toString(), Toast.LENGTH_SHORT).show();
 
                 // start a new activity
                 Intent intent = new Intent(RecordActivity.this, EditActivity.class);
@@ -58,11 +61,11 @@ public class RecordActivity extends AppCompatActivity {
                 intent.putExtra("comment", emotion.getComment());
                 startActivity(intent);
 
-//                TextView textView = (TextView) viewClicked;
-//                position ++;
-//                //textView.getText().toString()
-//                String message = "You selected #" + position + ", record in the list.";
-//                Toast.makeText(RecordActivity.this, message, Toast.LENGTH_SHORT).show();
+              //TextView textView = (TextView) viewClicked;
+              //position ++;
+              //textView.getText().toString()
+              //String message = "You selected #" + position + ", record in the list.";
+              //Toast.makeText(RecordActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -79,6 +82,7 @@ public class RecordActivity extends AppCompatActivity {
         }
     };
 
+    //refresh the array list on change.
     public void refresh() {
         ArrayList<Emotion> emotions = RecordController.getRecords(getSharedPreferences("emotions", MODE_MULTI_PROCESS));
         ArrayList<Emotion> list = new ArrayList<Emotion>(emotions);
