@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Oct 08 23:59:35 MDT 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\akazf\\Desktop\\zfu-FeelsBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.path=classes.dex
+0.set=DEX
+count=1

@@ -1,0 +1,4 @@
+#Mon Oct 08 23:59:03 MDT 2018
+base.0=C\:\\Users\\akazf\\Desktop\\zfu-FeelsBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
